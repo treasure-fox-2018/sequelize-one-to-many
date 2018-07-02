@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Teacher</title>
+  </head>
+  <body>
+    <h1>All Teachers Data</h1>
+    <h3><a href="/teacher/add">Add Teachers Data</a></h3>
+
+    <table>
+      <thead>
+          <tr>
+            <td>Id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Subject Name</td>
+            <td>Options</td>
+          </tr>
+      </thead>
+      <tbody>
+          <% dataTeacher.forEach((data) => { %>
+            <td><%=data.id%></td>
+            <td><%=data.firstName%></td>
+            <td><%=data.lastName%></td>
+            <td><%=data.email%></td>
+            <% if(data.SubjectId == null) { %>
+                <td>unassigned</td>
+            <%}else { %>
+                <td><%=data.Subject.subjectName%></td>
+          <%}%>
+            <td><a href="/teacher/edit/<%=data.id%>">Edit</a><a href="/teacher/delete/<%=data.id%>"> | Delete</a></td>
+          <tr></tr>
+          <%})%>
+      </tbody>
+    </table>
+    
+    <a href="/">Back</a>
+  </body>
+</html>

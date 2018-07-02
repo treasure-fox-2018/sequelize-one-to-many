@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Subject</title>
+  </head>
+  <body>
+    <h1>All Subjects Data</h1>
+    <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Subject Name</th>
+            <th>Teacher</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% dataSubject.forEach((data) => { %>
+          <tr>
+            <td><%=data.id%></td>
+            <td><%=data.subjectName%></td>
+            <td>
+              <ol>
+                <%data.Teachers.forEach((data_teacher) => {%>
+                  <li>
+                      <%=data_teacher.firstName%> <%=data_teacher.lastName%>
+                  </li>
+                <%})%>
+              </ol>
+            </td>
+          <%})%>
+          </tr>
+        </tbody>
+    </table>
+    <a href="/">Back</a>
+  </body>
+</html>
