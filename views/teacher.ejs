@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <h1>DATA TEACHER</h1>
+    <h2><a href="/">home page</a></h2>
+    <a href="/teacher/add">Add Teacher Data</a>
+    <table>
+        <tr>
+          <th>id</th>
+          <th>first name</th>
+          <th>last name</th>
+          <th>email</th>
+          <th>Subjcet</th>
+          <th>Option</th>
+        </tr>
+        <% dataTeacher.forEach(function(teacher){%>
+        <tr>
+          <td><%= teacher.id %></td>
+          <td><%= teacher.firstName %></td>
+          <td><%= teacher.lastName %></td>
+          <td><%= teacher.email %></td>
+          <td>
+              <%if(teacher.SubjectId == null ){ %>
+                  unassigned
+             <% }else{ %>
+                  <%=teacher.Subject.subjectName %>
+             <% }%>
+          </td>
+          <td> 
+            <a href="/teacher/edit/<%= teacher.id %>">edit</a> || 
+            <a href="/teacher/delete/<%= teacher.id %>">delete</a> </td>
+        </tr>
+        <% }) %>
+      </table>
+</body>
+</html>
