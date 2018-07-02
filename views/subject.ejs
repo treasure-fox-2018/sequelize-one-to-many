@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Subject</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+        
+</head>
+<body>
+    <h1>All Subject Data</h1>
+    <p>
+        <a href=""></a>
+    </p>
+    <table style="width:100%">
+        <thead>
+            <tr>
+              <th>Id</th>
+              <th>Subject Name</th>
+              <th>Teacher</th>
+              <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% dataSubject.forEach(function(subject){ %>
+                <tr>
+                    <td><%= subject.id %></td>
+                    <td><%= subject.subjectName %></td>
+                    <td>
+                        <ol>
+                            <% if(subject.Teachers.length === 0){ %>
+                                unassigned
+                            <% }else{ %>
+                                <% subject.Teachers.forEach(function(teacher){ %>
+                                    <li><%= teacher.getFullName()%></li>
+                                    <%})%>
+                            <% } %>
+                        </ol>
+                            
+                    </td>
+                    <td>
+                        <a href="/teachers/edit">Edit</a> ||
+                        <a href="/teachers/delete">Delete</a>
+                    </td>
+                </tr>
+            <%})%>
+        </tbody>  
+   </table>
+    
+</body>
+</html>
