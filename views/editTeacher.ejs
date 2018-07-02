@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center
+}
+h1, p{
+    text-align: center
+}
+</style>
+<title>Teachers</title>
+</head>
+<body>
+    <h1>Edit Teachers</h1>
+    <font color="red"><%= err %></font>
+    <p><a href ="/teachers">Teachers Data</a></p>
+    <div class="edit_teacher_table">
+        <form action="/teachers/edit/<%= editTeacher.id%>" method="post">
+            First name:<br>
+            <input type="text" name="firstName" value="<%= editTeacher.firstName%>">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastName" value="<%= editTeacher.lastName%>">
+            <br>
+            Email:<br>
+            <input type="text" name="email" value="<%= editTeacher.email%>">
+            <br>
+            Subject:<br>
+            <select name= "SubjectId">
+                <option value=1>Math</option>
+                <option value=2>Geography</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Edit Teacher">
+        </form>
+    </div>
+<p><a href ="/">home</a></p>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+h2, p {
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<h2>All Teachers Data</h2>
+<p><a href ="/teachers/add">Add teacher data</a></p>
+<table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Option</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% teachers.forEach(teacher => { %>
+        <tr>
+          <td><%= teacher.id %></td>
+          <td><%= teacher.firstName %></td>
+          <td><%= teacher.lastName %></td>
+          <td><%= teacher.email %></td>
+          <% if(teacher.Subject == null){ %>
+            <td>unassigned</td>
+            <% } else { %>
+                <td><%= teacher.Subject.subjectName %></td>
+                <% } %>
+          <td><a href = "/teachers/edit/<%=teacher.id%>">edit</a> || <a href="/teachers/delete/<%=teacher.id%>" onclick = "return confirm('delete this teacher?')"> delete</a> </td>
+        </tr>
+      <% })%>
+    </tbody>
+  </table>
+</body>
+</html>
+
