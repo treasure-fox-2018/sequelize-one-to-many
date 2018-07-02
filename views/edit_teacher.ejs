@@ -9,16 +9,16 @@
     <h1>Edit Teacher</h1>
     <form action="/teacher/edit/<%=dataTeacher.id%>" method="POST">
         <label for="firstName" >First Name :</label>
-        <input type="text" name="firstName">
+        <input type="text" name="firstName" value="<%=dataTeacher.firstName%>">
         <br><br>
         <label for="lastName">Last Name :</label>
-        <input type="text" name="lastName">
+        <input type="text" name="lastName" value="<%=dataTeacher.lastName%>">
         <br><br>
         <label for="email">Email :</label>
-        <input type="email" name="email">
+        <input type="email" name="email" value="<%=dataTeacher.email%>">
         <br><br>
         <label for="SubjectId"> Subject Id :</label>
-        <input type="text" name="SubjectId">
+        <input type="text" name="SubjectId" value="<%=dataTeacher.SubjectId%>">
         <br><br>
         <button>Edit Teacher</button>
     </form>

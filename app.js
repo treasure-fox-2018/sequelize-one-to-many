@@ -11,7 +11,7 @@ app.use('/',Teacher)
 app.use('/',Subject)
 
 app.get('/', function(req,res) {
-    res.send('HOMEPAGE')
+    res.render('home')
 })
 
 app.listen(3000, console.log('Server is Running'))
