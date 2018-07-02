@@ -38,7 +38,7 @@
                                 <%= dataTeacher.Subject.subjectName %>
                             <%}%> 
                         </td>
-                        <td><a href="">Edit</a> | <a href=""> Delete</a></td>
+                        <td><a href="/teacher/editteacher/<%= dataTeacher.id %>">Edit</a> | <a href="/teacher/deleteteacher/<%= dataTeacher.id %>"> Delete</a></td>
                     </tr>
                 <%})%>    
             </tbody>
