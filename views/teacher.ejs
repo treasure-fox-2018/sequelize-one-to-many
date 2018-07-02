@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Teacher Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body style="padding: 50px 0px">
+  <div class="container">
+    <h2>Teacher List</h2>
+  </div>
+  <div class="container">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th>id</id>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Subject</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% teachers.forEach(teacher => { %>
+               <tr>
+                 <td>
+                   <%= teacher.id %>
+                 </td>
+                 <td>
+                   <%= teacher.firstName %>
+                 </td>
+                 <td>
+                   <%= teacher.lastName %>
+                 </td>
+                 <td>
+                   <%= teacher.email %>
+                 </td>
+                 <td>
+                   <%= teacher.Subject.subjectName %>
+                 </td>
+                 <td><a href="/teacher/edit/<%= teacher.id%>" class="btn btn-warning">Edit</a>
+                     <a href="/teacher/delete/<%= teacher.id %>" class="btn btn-danger">Delete</a>
+                 </td>
+               </tr>
+               <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <div class="container text-center">
+    <button type="button" class="btn btn-info" onclick="window.location.href='/teacher/add'">Add Teacher</button>
+  </div>
+</body>
+</html>

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   {})
 
   Subject.associate = function(models) {
-      Subject.hasMany(models.teacher)
+      Subject.hasMany(models.Teacher)
   }
 
   return Subject
