@@ -22,14 +22,14 @@ routesteachers.get('/teachers/add', (req, res) => {
 })
 
 routesteachers.post('/teachers/add', (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     Teachers.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         SubjectId: req.body.SubjectId,
-        // createdAt: new Date(),
-        // updatedAt: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
     })
         .then(() => {
             res.redirect('/teachers')
