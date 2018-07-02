@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1>Data Teacher</h1>
+    <div class="align-center">
+        <h4><a href="/teacher">Home</a></h4>
+        <table>
+            <tr>
+              <th>id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Subject</th>
+              <th>Options</th>
+            </tr>
+                <% dataTeacher.forEach(function(dataTeacher) {%> 
+                    <tr>
+                    <td><%= dataTeacher.id %></td>
+                    <td><%= dataTeacher.first_name%></td>
+                    <td><%= dataTeacher.last_name%></td>
+                    <td><%= dataTeacher.email%></td>
+                    <td>
+                        <% if(dataTeacher.SubjectId === null) { %>
+                            <!-- <%= dataTeacher.SubjectId = 'unassign' %> -->
+                            unassign
+                       <% } else { %>
+                            <%= dataTeacher.Subject.name %>
+                       <% } %>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><a href="/teacher/edit/<%= dataTeacher.id %>">Edit</a></li>
+                            <li><a href="/teacher/delete/<%= dataTeacher.id %>">Delete</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                <% }) %>
+            </table>
+        </div>
+        <li><a href="/teacher/add">ADD DATA TEACHER</a></li>
+</body>
+</html>
