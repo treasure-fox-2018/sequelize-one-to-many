@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Subject</title>
+</head>
+<body>
+    <h1>Data Subject</h1>
+    <table border='1'>
+
+        <tr>
+            <th>Subject Name</th>
+            <th>Option</th>
+        </tr>
+        <% data.forEach(function(dataSubject){ %>
+            <tr>
+                <td><%= dataSubject.subject_name %></td>
+            <td>
+                <a href="edit/<%= dataSubject.id%>">Edit</a>
+                ||
+                <a href="delete/<%= dataSubject.id%>">Delete</a>
+            </td>
+                <% })%>
+            </tr>
+
+    </table>
+
+    <br><br>
+    <a href="/subject/add">Add New Subject</a>
+
+</body>
+</html>

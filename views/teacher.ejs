@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Teacher</title>
+</head>
+<body>
+    <h1>Data Teacher</h1>
+    <table border='1'>
+
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Option</th>
+        </tr>
+        <% data.forEach(function(dataTeacher){ %>
+            <tr>
+                <td><%= dataTeacher.id%></td>
+                <td><%= dataTeacher.first_name %></td>
+                <td><%= dataTeacher.last_name %></td>
+                <td><%= dataTeacher.email %></td>
+                <td>
+                        <a href="teachers/edit/<%= dataTeacher.id%>">Edit</a>
+                        ||
+                        <a href="teachers/delete/<%=dataTeacher.id%>">Delete</a>
+                    </td>
+                <% })%>
+            </tr>
+    </table>
+    <br><br>
+    <a href="teachers/add">Add New Teacher</a>
+
+</body>
+</html>
