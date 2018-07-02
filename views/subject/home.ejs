@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <title>Subject Home</title>
+</head>
+
+<body>
+  <h1>All Subject Data</h1>
+
+  <br>
+  <br>
+
+  <h3>
+    <a href="/subject/add">Add Subjects Data</a>
+  </h3>
+
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Subject Name</th>
+      <th>Teacher</th>
+      <th>Options</th>
+    </tr>
+
+    <% SubjectData.forEach( subject => { %>
+      <tr>
+        <td>
+          <%=subject.id %>
+        </td>
+        <td>
+          <%=subject.subject_name %>
+        </td>
+
+        <td>
+          <ol>
+            <% subject.Teachers.forEach( data => { %>
+              <li>
+                <%=data.first_name %>
+                  <%= data.last_name %>
+              </li>
+              <br>
+              <% }) %>
+          </ol>
+        </td>
+
+
+        <td><a href="/subject/edit/<%= subject.id %>">Edit</a> | <a href="/subject/delete/<%= subject.id %>">Delete</a></td>
+      </tr>
+      <% }) %>
+  </table>
+</body>
+
+</html>

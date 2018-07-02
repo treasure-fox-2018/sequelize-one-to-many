@@ -1,0 +1,27 @@
+
+
+body {
+  color : black;
+  text-align: center;
+}
+
+ul#list li {
+  display: inline;
+  margin : auto;
+}
+
+li a {
+  text-decoration: none;
+  margin : 20px;
+  font-size: 20px;
+}
+
+table {
+  margin : auto;
+  width: 500px;
+}
+
+
+table, th, td {
+  border: 1px solid black;
+}

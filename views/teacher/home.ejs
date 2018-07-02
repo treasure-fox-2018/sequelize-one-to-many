@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <title>Teacher Home</title>
+</head>
+
+<body>
+  <h1>All Teachers Data</h1>
+  
+  <br><br>
+
+  <h3><a href="/teacher/add">Add Teachers Data</a></h3>
+
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Subject</th>
+      <th>Options</th>
+    </tr>
+
+    <% teachersData.forEach( teacher => { %>
+      <tr>
+        <td><%=teacher.id %></td>
+        <td><%=teacher.first_name %></td>
+        <td><%=teacher.last_name %></td>
+        <td><%=teacher.email %></td>
+        <td>
+            <% if (teacher.SubjectId === null) { %>
+              unassigned
+            <% } else { %>
+              <%=teacher.Subject.subject_name %>
+            <% } %>
+          </td>
+        <td><a href="/teacher/edit/<%=teacher.id%>">Edit</a> | <a href="/teacher/delete/<%=teacher.id%>" onclick="confirm('Are you sure delete this data?')">Delete</a></td>
+      </tr>
+    <% }) %>
+  </table>
+
+  <script>
+      function myFunction() {
+        if(confirm("Are you sure delete this data?")) {
+          
+        }
+      }
+    </script>
+</body>
+
+</html>
