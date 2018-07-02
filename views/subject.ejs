@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="https://hacktiv8.com/img/fox--md5--a9e377ae39495073d0e66db163fc8d9b.png">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
+
+  <title>Hacktiv8 Indonesia - Ari Supriatna</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #F57F17">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand text-white" href="/">HACKTIV8</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="/">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Signup</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn my-2 my-sm-0 text-white" type="submit" style="background-color: #FBC02D">Search</button>
+      </form>
+    </div>
+  </nav>
+</body>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-12 col-sm-12">
+      <table class="table">
+        <thead style="background: #FDD835">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Subject Name</th>
+            <th scope="col">Teacher</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let i = 0; i < dataSubject.length; i++) { %>
+            <tr>
+              <td>
+                <%= i + 1 %>
+              </td>
+              <td>
+                <%= dataSubject[i].subject_name %>
+              </td>
+              <td>
+                <ol>
+                  <% dataSubject[i].Teachers.forEach(data => { %>
+                  <li>
+                    <%= data.first_name +" "+ data.last_name%>
+                  </li>
+                  <% }) %>
+                </ol>
+              </td>
+              <td>
+                <a href="/subject/edit/<%= dataSubject[i].id %>" class="btn btn-primary">Edit</a>
+                <a href="/subject/delete/<%= dataSubject[i].id %>" class="btn btn-primary">Delete</a>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-lg-4 col-md-12 col-sm-12">
+
+      <div class="card text-center">
+        <div class="card-header" style="background-color: #FBC02D">
+          <h5>Data School</h5>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Data Student</h5>
+          <a href="/student" class="btn btn-primary">Show Data</a>
+          <a href="/student/add" class="btn btn-primary">Add Data</a>
+          <br>
+          <br>
+          <h5>Data Teacher</h5>
+          <a href="/teacher/add" class="btn btn-primary">Add Data</a>
+          <br>
+          <br>
+          <h5>Data Subject</h5>
+          <a href="/subject" class="btn btn-primary">Show Data</a>
+          <a href="/subject/add" class="btn btn-primary">Add Data</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</html>
