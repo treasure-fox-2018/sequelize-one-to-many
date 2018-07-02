@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add <%= category %></title>
+</head>
+<body>
+<% if (category === 'subject') { %>
+  <h3>Edit subject</h3>
+  <form action="/subjects/edit/<%= data.id %>" method="post">
+    Subject name:<br>
+    <input type="text" name="subject_name" value= <%= data.subject_name %>>
+    <br><br>
+    <input type="submit" value="Submit">
+    <% if (err !== null) { %>
+      <p style="color: red;"><%= err %></p>
+    <% } %>
+  </form>
+<% } else { %>
+  <% if (category === 'teacher') { %>
+  <h3>Edit teacher</h3>
+  <form action="/teachers/edit/<%= data.id %>" method="post">
+  <% } else if (category === 'student') { %>
+  <h3>Edit student</h3>
+  <form action="/students/edit/<%= data.id %>" method="post">
+  <% } %>
+    First name:<br>
+    <input type="text" name="first_name" value= <%= data.first_name %>>
+    <br><br>
+    Last name:<br>
+    <input type="text" name="last_name" value= <%= data.last_name %>>
+    <br><br>
+    Email:<br>
+    <input type="text" name="email" value= <%= data.email %>>
+    <br><br>
+    <input type="submit" value="Submit">
+    <% if (err !== null) { %>
+      <p style="color: red;"><%= err %></p>
+    <% } %>
+  </form>
+<% } %>
+</body>
+</html>

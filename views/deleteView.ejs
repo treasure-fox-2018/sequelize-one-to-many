@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    table,th,td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+  <title>Delete <%= category %></title>
+</head>
+<body>
+  <h3>Delete <%= category %>?</h3>
+  <table>
+  <% if (category === 'subject') { %>
+    <tr>
+      <th>ID</th>
+      <th>Subject name</th>
+    </tr>
+    <tr>
+      <td><%= data.id %></td>
+      <td><%= data.subject_name %></td>
+    </tr>
+  <% } else { %>
+    
+    <tr>
+      <th>ID</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+    </tr>
+    <tr>
+      <td><%= data.id %></td>
+      <td><%= data.first_name %></td>
+      <td><%= data.last_name %></td>
+      <td><%= data.email %></td>
+    </tr>
+  <% } %>
+  </table>
+  <br>
+  <form action="/<%= category %>s/delete/<%= data.id %>" method="post">
+    <input type="submit" value="Delete">
+  </form>
+</body>
+</html>
