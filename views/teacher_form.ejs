@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Teacher Form</title>
+</head>
+<body>
+        <form action="/teacher/add" method="POST">
+            <p style="color: #ff3333" ><%=error%></p>
+            First name:<br>
+            <input type="text" name="firstName">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastName" >
+            <br>
+            Email:<br>
+            <input type="text" name="email">
+            <br>
+            Select:<br>
+            <select name="SubjectId">
+                <option value=1>Fisika</option>
+                <option value=2>Kimia</option>
+                <option value=3>Biologi</option>
+            </select>
+            <input type="submit" value="Submit">
+          </form>
+</body>
+</html>
