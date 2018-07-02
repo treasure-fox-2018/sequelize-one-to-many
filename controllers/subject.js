@@ -2,9 +2,11 @@ const models = require('../models');
 
 class Controller {
   static showAll (){
-    return models.Subject.findAll({raw:true, order: [
-      ['id', 'ASC']
-    ] })
+    return models.Subject.findAll({
+      order: [['id', 'ASC']], 
+      include: [models.Teacher]
+    }
+  )
   }
 
   static add(inputObj){

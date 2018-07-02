@@ -143,6 +143,7 @@ routes.get('/subjects/', (req, res) => {
   subject.showAll()
   .then( subjects => {
     res.render('subjects-data', {subjects: subjects})
+    console.log(subjects[0].Teachers[0].first_name)
   })
   .catch( err => {
     res.send(err.message)
