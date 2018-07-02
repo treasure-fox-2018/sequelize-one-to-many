@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>All Data Subjects</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject Name</th>
+                <th>Teachers</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% subjects.forEach(function(el){ %>
+                <tr>
+                  <td><%- el.id %></td>
+                  <td><%- el.subjectName %></td>
+                  <td>
+                      <ol>
+                          <% el.Teachers.forEach(function(val){ %>
+                                <li><%- val.getFullName() %></li>      
+                          <% }) %>
+                      </ol>
+                  </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

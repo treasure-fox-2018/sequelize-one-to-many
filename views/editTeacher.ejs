@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <% if(error !== null){ %> 
+       <p><%- error %></p>
+    <% } %>
+        <form action="/teachers/edit/<%- teacher.id %>" method="POST">
+            First name:<br>
+            <input type="text" name="firstName" placeholder="first Name" value="<%= teacher.firstName %>">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastName" placeholder="last Name" value="<%= teacher.lastName %>">
+            <br>
+            Email:<br>
+            <input type="text" name="email" placeholder="email" value="<%= teacher.email %>">
+            <br>
+            SubjectId:<br>
+            <select name="SubjectId">
+                    <% if(!teacher.SubjectId){ %>
+                        <option value="" >--pilih subject--</option>
+                    <% }else{ %>
+                        <% subjects.forEach(function(elemen){ %>
+                            <% if(elemen.id == teacher.SubjectId){ %>
+                                <option value="<%- elemen.id %>"><%- elemen.subjectName %></option>                   
+                                <% } %>
+                        <% }) %>
+                    <% } %>
+                <% subjects.forEach(function(el){ %>
+                    <option value="<%- el.id %>"><%- el.subjectName %></option>
+                <% }) %>
+            </select>
+            
+            <br><br>
+            <input type="submit" value="edit teacher">
+        </form> 
+</body>
+</html>

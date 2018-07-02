@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>All Teachers Data</h1>
+    
+    <table >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% teachers.forEach(function(el){ %>
+                <tr>
+                    <td><%- el.id %></td>
+                    <td><%- el.firstName %></td>
+                    <td><%- el.lastName %></td>
+                    <td><%- el.email %></td>
+
+                    <% if(el.Subject){ %>
+                        <td><%- el.Subject.subjectName %></td>
+                    <% }else{ %>
+                        <td>unassigned</td>
+                    <% } %>
+                    
+                    <td>
+                        <a href="/teachers/edit/<%- el.id %>">edit</a>
+                        |
+                        <a href="/teachers/delete/<%- el.id %>" onclick="return confirm('are you sure')">delete</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>    
+</body>
+</html>
