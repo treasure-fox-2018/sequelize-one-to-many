@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <form action="/teacher/<%=allData.id%>/edit_subject" method="POST">
+        Subject:<br>
+        <select name ="subject_id" value ="name">
+                <option><%=allData.Subject.name%></option>
+                <%subject.forEach(function(dataSubject){%>
+                    <option value ="<%=dataSubject.id%>"><%=dataSubject.name%></option>
+                <%})%>
+               
+        </select>
+        </form>
+</body>
+</html>

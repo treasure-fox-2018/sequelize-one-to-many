@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <%=err%>
+        <form action="/teacher/<%=allData.id%>/edit" method="POST">
+            First name:<br>
+            <input type="text" name="first_name" value = "<%=allData.first_name%>">
+            <br>
+            Last name:<br>
+            <input type="text" name="last_name" value = "<%=allData.last_name%>">
+            <br><br>
+            Email:<br>
+            <input type="text" name="email" value = "<%=allData.email%>">
+            <br><br>
+            Subject:<br>
+            <select name ="subject_id" value ="name">
+                    <option><%=allData.Subject.name%></option>
+                    <%subject.forEach(function(dataSubject){%>
+                        <option value ="<%=dataSubject.id%>"><%=dataSubject.name%></option>
+                    <%})%>
+                   
+            </select>
+            
+            <br><br>
+            <input type="submit" value="Submit">
+          </form> 
+</body>
+</html>

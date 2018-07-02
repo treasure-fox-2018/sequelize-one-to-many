@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        </style>
+        </head>
+        <body>
+        
+        <h2>Table Teacher</h2>
+        
+        <table>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Option</th>
+          </tr>
+          <%for(let i=0;i<allData.length;i++){%>
+          <tr>
+             
+            <td><%=allData[i].first_name%></td>
+            <td><%=allData[i].last_name%></td>
+            <td><%=allData[i].email%></td>
+            <%if(allData[i].Subject == null){%>
+                    <td>unassigned</td>
+
+                <%}else{%>
+                    <td><%=allData[i].Subject.name%>
+                        <a href ="/teacher/<%=allData[i].id%>/edit_subject">edit</a>
+                    </td>
+                <%}%>
+        
+            
+            <td>
+                <a href ="/teacher/<%=allData[i].id%>/edit">edit</a>
+                <a href ="/teacher/<%=allData[i].id%>/delete">delete</a>
+            
+            </td>
+          </tr>
+          <%}%>
+        </table>
+        <br><br>
+        <a href = "/teacher/add">add Data</a>|
+        <a href = "/subject">Subject</a>|
+        <a href = "/student/data">Data Student</a>
+</body>
+</html>
