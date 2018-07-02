@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All Subjects Data</title>
+    </head>
+    <body>
+        <center>
+            <h1>All Subjects Data</h1>
+            <h3><a href="subject/add">Add Subjects Data</a></h3>
+        </center>
+        <table style="width:100%" border="5">
+                <thead>>
+                    <tr>
+                        <th>Id</th>
+                        <th>SubjectName</th> 
+                        <th>Teacher</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let x=0; x<subject.length; x++) { %>          
+                        <tr>
+                            <td><%= subject[x].id %></td>
+                            <td><%= subject[x].subjectName %></td>
+                            <td>
+                                <ol>
+                                    <% for(let y=0; y<subject[x].Teachers.length; y++) { %>
+                                    <li><%= subject[x].Teachers[y].firstName+' '+subject[x].Teachers[y].lastName %></li>
+                                    <% } %> 
+                                </ol>
+                            </td> 
+                            <td><a href="/subject/<%=subject[x].id%>/edit">Edit</a> 
+                                | 
+                                <a href="/subject/<%=subject[x].id%>/delete">Delete</a></td>
+                        </tr>
+                    <% } %>
+                </tbody>     
+            </table>
+    
+
+    </body>
+</html>

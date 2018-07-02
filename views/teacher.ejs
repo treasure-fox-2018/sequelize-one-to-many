@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All Teachers Data</title>>
+    </head>
+    <body>
+        <center>
+            <h1>All Teachers Data</h1>
+            <h3><a href="/teacher/add">Add Teachers Data</a></h3>
+        </center>
+        <table style="width:100%" border="5">
+            <thead>>
+                <tr>
+                    <th>Id</th>
+                    <th>FirstName</th> 
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let x=0; x<teacher.length; x++) { %> 
+                <tr>
+                    <td><%= teacher[x].id %></td>
+                    <td><%= teacher[x].firstName %></td> 
+                    <td><%= teacher[x].lastName %></td>
+                    <td><%= teacher[x].email %></td>
+                    <td><%= teacher[x].Subject.subjectName%></td> 
+                    <td><a href="/teacher/<%=teacher[x].id%>/edit">Edit</a> 
+                        | 
+                        <a href="/teacher/<%=teacher[x].id%>/delete">Delete</a></td>
+                </tr>
+                <% } %>
+            </tbody>     
+        </table>
+    </body>
+</html>

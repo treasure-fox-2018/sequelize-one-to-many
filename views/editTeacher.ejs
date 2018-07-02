@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Teacher</title>
+    </head>
+    <body>
+        <h1>Edit Teacher here ...</h1>
+        <form action="/teacher/<%=teacher.id%>/edit" method="post">
+            <fieldset>
+              FirstName:<br>
+              <input type="text" name="firstName"><br>
+              LastName:<br>
+              <input type="text" name="lastName"><br>
+              Email:<br>
+              <input type="text" name="email"><br>
+              SubjectId:<br>
+              <input type="text" name="SubjectId"><br>
+              <input type="submit">
+            </fieldset>
+          </form>
+    </body>
+</html>
