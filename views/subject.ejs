@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Subject</title>
+</head>
+<body>
+    <h1>All Subject Data</h1>
+    <table  class="table">
+            <thead>
+                 <tr>
+                    <th>id</th>
+                    <th>subject_name</th>
+                    
+                </tr>
+             </thead>
+            <tbody>
+                <tr>
+                     <%data_subject.forEach((data_subject)=> {%>
+                        <td> <%= data_subject.id %></td>
+                        <td> <%= data_subject.subject_name %></td>
+                       
+               </tr>
+                <%})%>
+
+            </tbody>
+    </table>
+
+</body>
+</html>

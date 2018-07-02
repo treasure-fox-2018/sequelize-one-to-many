@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Teachers</title>
+    
+</head>
+<body>
+    
+    <h1>All Data Teachers</h1><br><br>
+    <a href="/teacher/add">add Teachers Data</a><br><br>
+    
+    <table  class="table">
+            <thead>
+                 <tr>
+                    <th>id</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>email</th>
+                    <th>subject</th>
+                    <th>Options</th>
+                </tr>
+             </thead>
+            <tbody>
+                <tr>
+                     <%data_teacher.forEach((data_teacher)=> {%>
+                        <td> <%= data_teacher.id %></td>
+                        <td> <%= data_teacher.first_name %></td>
+                        <td> <%= data_teacher.last_name %></td>
+                        <td> <%= data_teacher.email %></td>
+                        <td>
+                        <% if(data_teacher.SubjectId === null) {%>
+                            unassigned 
+                            <%} else {%>
+                             <%= data_teacher.Subject.subject_name %>
+                
+                        <%}%>
+                        </td>
+                       
+                        <td> <a href="/teacher/edit">Edit</a> | <a href="DELETE">Delete</a> </td>
+                </tr>
+                <%})%>
+
+            </tbody>
+    </table>
+    <div>
+        <a href="/">Back</a>
+    </div>
+</body>
+</html>
