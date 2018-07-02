@@ -22,6 +22,92 @@ routes.get('/teacher', (req, res) => {
     })
 })
 
+routes.get('/teacher/add', (req, res) => {
+    Subject.findAll()
+    .then(subjects => {
+        res.render('teacher-add', {subjects: subjects})
+    })
+    .catch(err => {
+        console.log(err)
+    })
+})
+
+routes.post('/teacher/add', (req, res) => {
+    let teacherFirstname = req.body.firstName
+    let teacherLastname = req.body.lastName
+    let teacherEmailArgs = req.body.email
+
+    Teacher.findAll({
+            where: {
+              email: teacherEmailArgs}
+        })
+        .then(emailExists => {
+            console.log(emailExists)
+
+            if (emailExists.length >= 1) {
+                alert('Email sudah ada!')
+                res.redirect('/teacher')
+            } else {
+              Teacher.create({
+                  firstName: teacherFirstname,
+                  lastName: teacherLastname,
+                  email: teacherEmailArgs,
+                  SubjectId: 1,
+              })
+              .then(() => {
+                  res.redirect('/teacher')
+              })
+              .catch(err => {
+                  console.log(err)
+              })
+            }
+        })
+        .catch(err => console.log(err))
+})
+
+routes.get('/teacher/delete/:id', (req, res) => {
+    Teacher.destroy({
+        where: {id: req.params.id}
+    })
+    .then(() =>
+        res.redirect('/teacher')
+    )
+    .catch(err => console.log(err))
+})
+
+routes.get('/teacher/edit/:teacherId', (req, res) => {
+    let teacherId = req.params.teacherId
+
+    Subject.findAll()
+    .then(subjects => {
+        Teacher.findById(teacherId)
+        .then(teacher => {
+          res.render('edit-teacher', {teacher:teacher, subjects:subjects})
+        })
+        .catch(err => console.log(err))
+    })
+})
+
+routes.post('/teacher/edit/:teacherId', (req, res) => {
+    let teacherId = req.params.teacherId
+
+    let newTeacherFirstname = req.body.firstName
+    let newTeacherLastname = req.body.lastName
+    let newTeacherEmail = req.body.email
+
+    Teacher.update(
+      {
+        firstName: newTeacherFirstname,
+        lastName: newTeacherLastname,
+        email: newTeacherEmail
+      }, {where: {id : teacherId}}
+    )
+    .then(() =>
+        res.redirect('/teacher')
+    )
+    .catch(err => console.log(err))
+})
+
 routes.get('/subject', (req, res) => {
     Subject.findAll({include: [Teacher]})
     .then(subjects => {
