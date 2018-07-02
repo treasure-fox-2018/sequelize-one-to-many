@@ -61,7 +61,7 @@ routes.get('/subjects', (req, res) => {
             // Teachers: data
 
         })
-        console.log(data[0].Teachers)
+        // console.log(data[0].Teachers)
 
     })
 })
@@ -105,7 +105,7 @@ routes.get('/teacher/delete/:id', function (req, res) {
         })
 
 })
-console.log(JSON.stringify(models.Subject.id))
+// console.log(JSON.stringify(models.Subject.id))
 
 module.exports = routes;
 
