@@ -1,1 +1,1 @@
-# sequelize-one-to-many
+# sequelize-many-to-many
