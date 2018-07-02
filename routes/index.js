@@ -12,6 +12,30 @@ routes.get('/', (req, res) => {
     res.render('homepage')
 })
 
+routes.get('/subject/add', (req, res) => {
+    res.render('subject-add')
+})
+
+routes.post('/subject/add', (req, res) => {
+    Subject.findAndCountAll({where: {subjectName: req.body.subjectName}})
+    .then(findSubjectResult => {
+        if (findSubjectResult >= 1) {
+            console.log('Subject sudah ada')
+            res.redirect('/subject/add')
+        } else {
+            Subject.create(
+            {
+                  subjectName: req.body.subjectName
+            })
+            .then( () => {
+                res.redirect('/subject')
+            })
+            .catch(err => console.log(err))
+        }
+    })
+    .catch(err => console.log(err))
+})
+
 routes.get('/teacher', (req, res) => {
     Teacher.findAll({include: [Subject]})
     .then(teachers => {
@@ -37,32 +61,35 @@ routes.post('/teacher/add', (req, res) => {
     let teacherLastname = req.body.lastName
     let teacherEmailArgs = req.body.email
 
-    Teacher.findAll({
-            where: {
-              email: teacherEmailArgs}
-        })
-        .then(emailExists => {
-            console.log(emailExists)
+    Subject.findOne({where: {subjectName: req.body.subjectChoose}})
+    .then(subject => {
+        Teacher.findAll({
+                where: {
+                  email: teacherEmailArgs}
+            })
+            .then(emailExists => {
+                console.log(emailExists)
 
-            if (emailExists.length >= 1) {
-                alert('Email sudah ada!')
-                res.redirect('/teacher')
-            } else {
-              Teacher.create({
-                  firstName: teacherFirstname,
-                  lastName: teacherLastname,
-                  email: teacherEmailArgs,
-                  SubjectId: 1,
-              })
-              .then(() => {
-                  res.redirect('/teacher')
-              })
-              .catch(err => {
-                  console.log(err)
-              })
-            }
-        })
-        .catch(err => console.log(err))
+                if (emailExists.length >= 1) {
+                    console.log('Email sudah ada!')
+                    res.redirect('/teacher')
+                } else {
+                  Teacher.create({
+                      firstName: teacherFirstname,
+                      lastName: teacherLastname,
+                      email: teacherEmailArgs,
+                      SubjectId: subject.id,
+                  })
+                  .then(() => {
+                      res.redirect('/teacher')
+                  })
+                  .catch(err => {
+                      console.log(err)
+                  })
+                }
+            })
+            .catch(err => console.log(err))
+    })
 })
 
 routes.get('/teacher/delete/:id', (req, res) => {
@@ -99,7 +126,7 @@ routes.post('/teacher/edit/:teacherId', (req, res) => {
       {
         firstName: newTeacherFirstname,
         lastName: newTeacherLastname,
-        email: newTeacherEmail
+        email: newTeacherEmail,
       }, {where: {id : teacherId}}
     )
     .then(() =>
