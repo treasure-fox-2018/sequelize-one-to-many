@@ -26,11 +26,19 @@
       <table>
         <tr>
           <th>Subject</th>
+          <th>Teacher</th>
           <th colspan="2">Options</th>
         </tr>
         <% subjects.forEach(subject =>{%>
         <tr>
           <td><%= subject.name %></td>
+          <td>
+            <ol>
+              <% subject.Teachers.forEach(teacher =>{%>
+              <li><%= teacher.first_name %> <%= teacher.last_name %></li>
+              <%})%>
+            </ol>
+          </td>
           <td><a href="/subject/edit/<%= subject.id%>">Edit</a></td>
           <td><a href="/subject/delete/<%= subject.id%>">Delete</a></td>
         </tr>

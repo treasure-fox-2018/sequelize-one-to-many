@@ -2,7 +2,10 @@ const routes = require('express').Router();
 const models = require('../models');
 
 routes.get('/subject', (req, res) =>{
-  models.Subject.findAll()
+  models.Subject.findAll({
+    order: [['id', 'ASC']],
+    include: [models.Teacher]
+  })
   .then(function(subjects){
     res.render("subject",{title:'Subjects Data', links:'links:', subjects: subjects})
   })
