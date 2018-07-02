@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Subject Page</title>
+</head>
+<body>
+    <h1>All Subjects Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject Name</th>
+                <th>Teacher</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% dataSubject.forEach((data) => { %>
+            <tr>
+                <td><%=data.id%></td>
+                <td><%=data.subjectName%></td>
+                <td><%=data.Teachers.firstName%></td>
+            <%})%>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
