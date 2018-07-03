@@ -63,8 +63,10 @@ app.get('/teachers/edit/:id', (req, res) => {
 app.post('/teachers/edit/:id', (req, res) => {
   models.Teacher.update(
     {
+      id : req.params.id,
       firstName : req.body.firstName,
       lastName : req.body.lastName,
+      email : req.body.email,
       SubjectId : req.body.SubjectId
     },
     {
@@ -138,7 +140,6 @@ app.get('/subjects/edit/:id', (req, res) => {
 })
 
 app.post('/subjects/edit/:id', (req, res) => {
-  console.log(req.body)
   models.Subject.update(
     {
       subjectName : req.body.subjectName
