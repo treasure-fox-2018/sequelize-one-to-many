@@ -1,5 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+  let Op = sequelize.Op
   var Teacher = sequelize.define('Teacher', {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
@@ -10,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         is: { args: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, msg: 'Email format is incorrect'},
         isUnique: function(value, next) {
           Teacher.findOne({
-            where: {email : value}
+            where: {email : value,
+            id: {
+              [Op.ne] : this.id
+            }}
           })
           .then(result => {
             if(result !== null) {
