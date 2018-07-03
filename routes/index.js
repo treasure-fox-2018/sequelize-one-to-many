@@ -20,6 +20,32 @@ routes.get("/teachers", function(req,res){
     })
 })
 
+routes.get("/teachers/add", function(req,res){
+    let teachers = model.Teacher.findAll()
+    let subjects = model.Subject.findAll()
+    
+    Promise.all([teachers,subjects]).then(function(values) {
+        res.render("addTeachers", {teachers:values[0],subjects:values[1],error:null})
+    });
+      
+})
+
+routes.post("/teachers/add",function(req,res){
+    model.Teacher
+    .create({
+        firstName :req.body.firstName,
+        lastName : req.body.lastName,
+        email: req.body.email,
+        SubjectId :req.body.SubjectId
+    })
+    .then(function(teacher){
+        res.redirect("/teachers")
+    })
+    .catch(function(err){
+        res.json(err)
+    })
+})
+
 routes.get("/teachers/edit/:id",function(req,res){
     model.Teacher
     .findById(req.params.id)
@@ -69,13 +95,25 @@ routes.post("/teachers/edit/:id", function(req,res){
             model.Teacher
             .findById(req.params.id)
             .then(function(teacher){
-                res.render("editTeacher", {teacher:teacher,error : error.message})
+               return teacher
+            })
+            .then(function(teacher){
+                model.Subject
+                .findAll()
+                .then(function(subjects){
+                    res.render("editTeacher", {
+                        teacher:teacher,
+                        subjects:subjects,
+                        error:error.message})
+                })
+                .catch(function(err){
+                    res.json(err)
+                })
             })
             .catch(function(err){
-                res.send(err)
+                res.json(err)
             })
         })
-        
     })
     .catch(function(err){
         res.send(err)
@@ -104,8 +142,11 @@ routes.get("/teachers/delete/:id", function(req,res){
             id:req.params.id
         }
     })
-    .then(function(err){
+    .then(function(teacher){
         res.redirect("/teachers")
+    })
+    .then(function(err){
+        res.json(err)
     })
 })
 
