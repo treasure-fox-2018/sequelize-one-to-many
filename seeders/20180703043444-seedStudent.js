@@ -12,19 +12,29 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-  return queryInterface.bulkInsert('Subjects', [
+  return queryInterface.bulkInsert('Students', [
     {
-      subjectName: 'DragonTrainer-102'
-    }, {
-      subjectName: 'DemonSlaying-201'
-    }, {
-      subjectName: 'SpellSlinging-301'
-    }, {
-      subjectName: 'PoisonAndAssasination'   
-    }, {
-      subjectName: 'BeastHunting-TargetVitalSpot'
-    }], 
-    {});
+    firstName: 'Finn',
+    lastName: 'Finner',
+    email: 'finn@mail.com'
+    },{
+      firstName: 'Dum',
+      lastName: 'Dum',
+      email: 'dum@mail.com'
+    },{
+      firstName: 'Aggron',
+      lastName: 'StoneBreaker',
+      email: 'aggron@mail.com'
+    },{
+      firstName: 'Gilden',
+      lastName: 'Silveric',
+      email: 'gilden@mail.com'
+    },{
+      firstName: 'Losha',
+      lastName: 'Vallas',
+      email: 'losha@mail.com'
+    }
+  ], {});
   },
 
   down: (queryInterface, Sequelize) => {

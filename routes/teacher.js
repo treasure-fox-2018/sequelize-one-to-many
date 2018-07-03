@@ -1,8 +1,6 @@
 const express = require ('express')
 const router = express.Router ()
-const ejs = require ('ejs')
 const models = require('../models')
-const sequelize = require('sequelize')
 
 router.get('/', function (req, res) {
     models.Teacher.findAll(
@@ -22,11 +20,22 @@ router.get('/', function (req, res) {
 })
 
 router.get('/add', function (req, res) {
-    res.render('addTeacher.ejs', {})
+    models.Subject.findAll()
+    .then(subject => {
+        res.render('addTeacher.ejs', {subject : subject})
+    })
+    .catch(() => {
+        res.json(error)
+    })
 })
 
 router.post('/add', function (req, res) {
-    models.Teacher.create(req.body)
+    let add = {}
+    add.firstName = req.body.firstName
+    add.lastName = req.body.lastName
+    add.email = req.body.email
+    add.SubjectId = req.body.SubjectId
+    models.Teacher.create(add)
     .then(() => {
         res.redirect('/teacher')
     })
@@ -51,7 +60,14 @@ router.get('/:id/edit', function (req, res) {
     let id = req.params.id
     models.Teacher.findOne({where: {id}})
     .then(teacher => {
-        res.render('editTeacher.ejs', {teacher})
+        models.Subject.findAll()
+        .then(subject => {
+            res.render('editTeacher.ejs', {teacher : teacher, 
+                                        subject : subject})
+        })
+        .catch(error => {
+            res.json(error)
+        })
     })
     .catch(error => {
         res.json(error)

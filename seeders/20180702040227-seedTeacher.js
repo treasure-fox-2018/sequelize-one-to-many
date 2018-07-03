@@ -18,43 +18,41 @@ module.exports = {
       lastName: 'Bullion',
       email: 'emon@mail.com',
       SubjectId: 3,
-      createdAt: new Date (),
-      updatedAt: new Date ()
     },{
       firstName: 'Vero',
       lastName: 'Cranberry',
       email: 'vero@mail.com',
       SubjectId: 2,
-      createdAt: new Date (),
-      updatedAt: new Date ()
     },{
       firstName: 'Salem',
       lastName: 'Durothar',
       email: 'salem@mail.com',
       SubjectId: 1,
-      createdAt: new Date (),
-      updatedAt: new Date ()
     },{
       firstName: 'Linglesou',
       lastName: 'Hex',
       email: 'linglesou@mail.com',
       SubjectId: 3,
-      createdAt: new Date (),
-      updatedAt: new Date ()
     },{
       firstName: 'Sulfer',
       lastName: 'Handuras',
       email: 'sulfer@mail.com',
       SubjectId: 2,
-      createdAt: new Date (),
-      updatedAt: new Date ()
     },{
       firstName: 'Baltrix',
       lastName: 'ElderDragon',
       email: 'baltrix@mail.com',
       SubjectId: 1,
-      createdAt: new Date (),
-      updatedAt: new Date ()
+    },{
+      firstName: 'Faeryl',
+      lastName: 'Viconia',
+      email: 'faeryl@mail.com',
+      SubjectId: 4,
+    },{
+      firstName: 'Auric',
+      lastName: 'Moor',
+      email: 'auric@mail.com',
+      SubjectId: 5,
     }], {});
   },
 

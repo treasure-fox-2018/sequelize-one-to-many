@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Subject To Student</title>
+</head>
+<body>
+    <h1>Add Subject to this Student</h1>
+        <table style="width:70%" border="5">
+            <thead>
+                 <tr>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <tr>
+                  <td><%= student.firstName %></td>
+                  <td><%= student.lastName %></td>
+                  <td><%= student.email %></td>
+                  <td>
+                      <ol>
+                        <% for(let x=0; x<student.Subjects.length; x++) { %>
+                          <li><%= student.Subjects[x].subjectName %></li>
+                        <% } %>
+                      </ol>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+        <form action="/student/<%=student.id%>/addSubject" method="POST">
+            <fieldset>
+              SubjectId:<br>
+                <select name="SubjectId">
+                    <% subject.forEach(subject => { %>
+                    <option value="<%=subject.id%>"><%=subject.subjectName%></option>
+                    <% }) %>
+                </select> <br>
+              <input type="submit">
+            </fieldset>
+        </form>
+</body>
+</html>
+

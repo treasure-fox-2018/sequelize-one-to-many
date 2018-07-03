@@ -1,8 +1,6 @@
 const express = require ('express')
 let router = express.Router ()
-const ejs = require ('ejs')
 const models = require('../models')
-const sequelize = require('sequelize')
 
 router.get('/', function (req,res) {
     models.Subject.findAll(
@@ -26,7 +24,9 @@ router.get('/add', function (req, res) {
 })
 
 router.post('/add', function (req, res) {
-    models.Subject.create(req.body)
+    let add = {}
+    add.subjectName = req.body.subjectName
+    models.Subject.create(add)
     .then(() => {
         res.redirect('/subject')
     })
@@ -55,7 +55,6 @@ router.get('/:id/edit', function (req, res) {
     .catch(error => {
         res.json(error)
     })
-    
 })
 
 router.post('/:id/edit', function (req, res) {

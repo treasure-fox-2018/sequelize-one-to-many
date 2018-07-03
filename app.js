@@ -16,4 +16,7 @@ app.use('/subject', require('./routes/subject.js'))
 // teacher
 app.use('/teacher', require('./routes/teacher.js'))
 
+// student
+app.use('/student', require('./routes/student.js'))
+
 app.listen(3000)

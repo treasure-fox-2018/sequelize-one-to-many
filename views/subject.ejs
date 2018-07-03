@@ -15,6 +15,7 @@
                         <th>SubjectName</th> 
                         <th>Teacher</th>
                         <th>Options</th>
+                        <th>EnrolledStudents</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,11 +33,10 @@
                             <td><a href="/subject/<%=subject[x].id%>/edit">Edit</a> 
                                 | 
                                 <a href="/subject/<%=subject[x].id%>/delete">Delete</a></td>
+                            <td><a href="">EnrolledStudents</a></td>
                         </tr>
                     <% } %>
                 </tbody>     
             </table>
-    
-
     </body>
 </html>

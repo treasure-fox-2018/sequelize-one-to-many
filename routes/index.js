@@ -1,10 +1,8 @@
 const express = require ('express')
-let router = express.Router ()
-const ejs = require ('ejs')
+const router = express.Router ()
 
 router.get('/', function (reg,res) {
     res.render('mainPage.ejs')
 })
-
 
 module.exports = router
