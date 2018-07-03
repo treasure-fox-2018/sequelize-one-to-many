@@ -1,4 +1,6 @@
 'use strict';
+const Op = Sequelize.Op
+
 module.exports = (sequelize, DataTypes) => {
   var Teacher = sequelize.define('Teacher', {
     first_name: DataTypes.STRING,
@@ -12,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         isUnique: (value, cb) => {
           Teacher.find({
-            where: {email: value}
+            where: {
+              email: value,
+              id: {
+                [Op.ne]: this.id
+              }
+            }
           })
           .then( (email) => {
             if (email !== null) {
