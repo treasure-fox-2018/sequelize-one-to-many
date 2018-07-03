@@ -49,6 +49,7 @@ routes.get('/teacher/edit/:id', (req, res) => {
 routes.post('/teacher/edit/:id', (req, res) => {
   const request = req.body
   Teachers.update({
+    id: req.params.id,
     first_name: request.first_name,
     last_name: request.last_name,
     email: request.email,

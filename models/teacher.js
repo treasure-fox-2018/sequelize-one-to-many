@@ -1,5 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+  const Op = sequelize.Op
   var Teacher = sequelize.define('Teacher', {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
@@ -11,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
           function(emailInput, next) {
             Teacher.find({
               where: {
-                email: emailInput
+                email: emailInput,
+                id: {
+                  [Op.ne]: this.id
+                }
               }
             })
             .then(validasiEmail => {
