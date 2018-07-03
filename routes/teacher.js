@@ -4,14 +4,11 @@ const Model = require('../models/')
 
 router.get('/', (req,res) => {
     Model.Teacher.findAll({
-        order: [
-            'id'
-        ],
+        order: ['id'],
         include: [Model.Subject]
     })
 
     .then(dataTeacher => {
-        
         console.log(JSON.parse(JSON.stringify(dataTeacher)))
         res.render('teacher', {dataTeacher: dataTeacher})
     })
@@ -28,28 +25,29 @@ router.get('/addteacher', (req,res) => {
 
 router.post('/addteacher', (req,res) => {
     //console.log(req.body);
-    
     Model.Teacher.create({
         firstName: req.body.FirstName,
         lastName: req.body.LastName,
         email: req.body.Email
     })
 
-    .then(function() {
+    .then(() => {
         res.redirect('/teacher')
     })
 
     .catch(err => {
-        res.send(err)
+        res.send(err.message)
     })
 })
 
 router.get('/editteacher/:id', (req,res) => {
     Model.Teacher.findById(req.params.id)
-    .then(data => {
-        res.render('editteacher', {dataTeacher: data})
+    .then(Teacher => {
+        Model.Subject.findAll()
+        .then(Subject => {
+            res.render('editteacher', {dataTeacher: Teacher, dataSubject: Subject}) // data asli: alias
+        })
     })
-    
 })
 
 router.post('/editteacher/:id', (req,res) => {
@@ -57,13 +55,14 @@ router.post('/editteacher/:id', (req,res) => {
     Model.Teacher.update({
         firstName: req.body.FirstName,
         lastName: req.body.LastName,
-        email: req.body.Email
+        email: req.body.Email,
+        SubjectId: req.body.SubjectId
     },
     {
         where: { id: req.params.id }
     })
 
-    .then(function() {
+    .then(() => {
         res.redirect('/teacher')
     })
 
