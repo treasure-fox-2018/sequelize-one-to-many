@@ -13,7 +13,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/teacher' , (req, res) => {
-    Models.Teacher.findAll({ include: [Models.Subject]})
+    Models.Teacher.findAll({ 
+        include: [Models.Subject],
+        order: [
+            ['id', 'ASC']
+        ]
+    })
     .then(function(dataTeachers) {
         // res.send(dataTeachers)
         // console.log(dataTeachers);
@@ -25,23 +30,29 @@ app.get('/teacher' , (req, res) => {
 app.get('/teacher/add', (req, res) => {
     Models.Subject.findAll()
     .then(subject => {
-        res.render('register_teacher', {dataSubject:subject}) // this file ejs
+        console.log(subject);
+        res.render('register_teacher', {subject:subject}) // this file ejs
     })
 })
 
-app.post('/teacher', (req, res) => {
+app.post('/teacher/add', (req, res) => {
     // console.log(req.body);
     Models.Teacher.create ({
         first_name: req.body.firstname,
         last_name: req.body.lastname,
         email: req.body.email,
-        StudentId: req.body.SubjectId
+        SubjectId: req.body.SubjectId
     })
     .then((teacher)=> {
+        // console.log('======>',req.body.SubjectId);
         res.redirect('/teacher') // will search get
     })
     .catch((err) => {
-        res.render('register_teacher', {err:err.message})
+        // res.json(err)
+        Models.Subject.findAll()
+        .then(subject => {
+            res.render('register_teacher', {err:err.message, subject:subject}) //subject will be define
+        })
     })
 })
 
