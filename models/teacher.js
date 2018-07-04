@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-  }, {});
+  }, { });
   Teacher.associate = function(models) {
     // associations can be defined here
     Teacher.belongsTo(models.Subject)
@@ -34,5 +34,39 @@ module.exports = (sequelize, DataTypes) => {
   Teacher.prototype.getFullName = function(models){
     return `${this.firstName} ${this.lastName}`
   }
+
+  Teacher.beforeValidate(function(teacher, options){
+    let id = teacher.id
+    let email = teacher.email
+      Teacher
+      .findById(id)
+      .then(function(teacher){
+        if(teacher.email === email){
+           Teacher.deleteOldEmail(id, email) 
+        }
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+  });
+
+  Teacher.beforeCreate( function(user, options){
+    console.log('hoiii')
+  });
+
+  Teacher.deleteOldEmail = function(id, email){
+    Teacher
+    .update({
+      email : null
+    }, {
+      where:{
+        id:id
+      }
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+  }
+  
   return Teacher;
 };

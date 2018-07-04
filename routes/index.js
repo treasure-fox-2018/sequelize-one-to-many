@@ -74,13 +74,10 @@ routes.get("/teachers/edit/:id",function(req,res){
 routes.post("/teachers/edit/:id", function(req,res){
     model.Teacher
     .findById(req.params.id)
-    .then(function(teacher){
-        if(teacher.email === req.body.email){
-            delete req.body.email
-        }
-        
+    .then(function(teacher){     
         model.Teacher
         .update({
+            id : req.params.id,
             firstName : req.body.firstName,
             lastName : req.body.lastName,
             email : req.body.email,
