@@ -11,9 +11,9 @@ app.use(express.urlencoded({ extended : false }));
 app.set('views', __dirname + '/views');
 app.use(express.static('public'));
 
-app.use(homepage);
-app.use(teachers);
-app.use(subjects);
+app.use('/', homepage);
+app.use('/teacher', teachers);
+app.use('/subject', subjects);
 
 var server = app.listen(3000, () => {
   console.log('listening to port', server.address().port)

@@ -12,13 +12,14 @@
 <body>
   <h1>Teacher's Edit Data</h1>
   <ul id="list">
+    <li><a href="/">Home</a></li>
     <li><a href="/subject">All Subject Data</a></li>
   </ul>
 
   <br>
   
   <form action="/subject/edit/<%= dataSubject.id %>" method="POST">
-    First Name:  <input type="text" name="subject_name" value="<%= dataTeacher.subject_name %>">
+    Subject Name:  <input type="text" name="subject_name" value="<%= dataSubject.subject_name %>">
     <br><br>
     <button type="submit">edit data</button>
   </form>

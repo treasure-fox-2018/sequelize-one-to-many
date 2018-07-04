@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const models = require('../models');
 
-router.get('/teacher', (req, res) => {
+router.get('/', (req, res) => {
   models.Teacher.findAll({
     order : [["id", "ASC"]], 
     include : [models.Subject]
@@ -16,21 +16,21 @@ router.get('/teacher', (req, res) => {
     })
 })
 
-router.get('/teacher/add', (req, res) => {
+router.get('/add', (req, res) => {
   models.Subject.findAll({
     order : [["id", "ASC"]], 
   })
     .then(subjectsData => {
-      // res.send(teachersData[1].Subject.subject_name)
+      // res.send(subjec)
       res.render('./teacher/add.ejs', {error : null, subjects : subjectsData})
     })
     
     .catch (err => {
-      res.send(err.message)
+      res.render('./teacher/add.ejs', {error: err.message})
     })
 })
 
-router.post('/teacher/add', (req, res) => {
+router.post('/add', (req, res) => {
   models.Teacher.create({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
@@ -38,7 +38,7 @@ router.post('/teacher/add', (req, res) => {
     SubjectId: req.body.SubjectId
   })
     .then(() => {
-      res.redirect('/teacher')
+      res.redirect('/')
     })
 
     .catch(err => {
@@ -46,7 +46,7 @@ router.post('/teacher/add', (req, res) => {
     })
 })
 
-router.get('/teacher/edit/:id', (req, res) => {
+router.get('/edit/:id', (req, res) => {
   // console.log(req.params.id)
   models.Teacher.findById(req.params.id)
     .then (editTeacher => {
@@ -54,7 +54,7 @@ router.get('/teacher/edit/:id', (req, res) => {
     })
 })
 
-router.post('/teacher/edit/:id', (req, res) => {
+router.post('/edit/:id', (req, res) => {
 
   models.Teacher.update({
     id : req.params.id,
@@ -67,7 +67,7 @@ router.post('/teacher/edit/:id', (req, res) => {
     }
   })
     .then (() => {
-      res.redirect('/teacher')
+      res.redirect('/')
     })
 
     .catch(err => {
@@ -75,7 +75,7 @@ router.post('/teacher/edit/:id', (req, res) => {
     })
 })
 
-router.get('/teacher/delete/:id', (req, res) => {
+router.get('/delete/:id', (req, res) => {
   
   models.Teacher.destroy({
     where : {
@@ -83,7 +83,7 @@ router.get('/teacher/delete/:id', (req, res) => {
     }
   })
   .then (() => {
-    res.redirect('/teacher')
+    res.redirect('/')
   })
 })
 

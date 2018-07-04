@@ -1,7 +1,7 @@
-const subject = require('express').Router();
+const routes = require('express').Router();
 const models = require('../models');
 
-subject.get('/subject', (req, res) => {
+routes.get('/', (req, res) => {
   models.Subject.findAll({
     order : [["id", "ASC"]], 
     include : [models.Teacher]
@@ -16,18 +16,16 @@ subject.get('/subject', (req, res) => {
     })
 })
 
-subject.get('/subject/add', (req, res) => {
+routes.get('/add', (req, res) => {
   res.render('./subject/add.ejs', {error : null})
-  
-  
 })
 
-subject.post('/subject/add', (req, res) => {
+routes.post('/add', (req, res) => {
   models.Subject.create({
     subject_name: req.body.subject_name,
   })
     .then(() => {
-      res.redirect('/subject')
+      res.redirect('/')
     })
 
     .catch(err => {
@@ -35,15 +33,15 @@ subject.post('/subject/add', (req, res) => {
     })
 })
 
-subject.get('/subject/edit/:id', (req, res) => {
-  console.log(req.params.id)
+routes.get('/edit/:id', (req, res) => {
+  // console.log(req.params.id)
   models.Subject.findById(req.params.id)
     .then (editSubject => {
       res.render('./subject/edit.ejs', { dataSubject : editSubject})
     })
 })
 
-subject.post('/subject/edit/:id', (req, res) => {
+routes.post('/edit/:id', (req, res) => {
 
   models.Subject.update({
     subject_name : req.body.subject_name,
@@ -53,7 +51,7 @@ subject.post('/subject/edit/:id', (req, res) => {
     }
   })
     .then (() => {
-      res.redirect('/subject')
+      res.redirect('/')
     })
 
     .catch(err => {
@@ -61,7 +59,7 @@ subject.post('/subject/edit/:id', (req, res) => {
     })
 })
 
-subject.get('/subject/delete/:id', (req, res) => {
+routes.get('/delete/:id', (req, res) => {
   
   models.Subject.destroy({
     where : {
@@ -72,4 +70,4 @@ subject.get('/subject/delete/:id', (req, res) => {
     res.redirect('/subject')
   })
 })
-module.exports = subject
+module.exports = routes
