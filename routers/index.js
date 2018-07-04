@@ -28,7 +28,12 @@ router.get('/teachers', function(req, res){
 })
 
 router.get('/teachers/add', function(req, res){
-    res.render('addTeacher', {err:null})
+    model.Subject.findAll()
+        .then(subjects => {
+            // res.json(subjects)
+            res.render('addTeacher', {subjects, err:null})
+        })
+    // res.render('addTeacher', {err:null})
 })
 
 router.post('/teachers/add', function(req, res){
@@ -49,9 +54,15 @@ router.post('/teachers/add', function(req, res){
 
 router.get('/teachers/edit/:id', function(req, res){
     let id = req.params.id
-    model.Teacher.findById(id)
+    model.Teacher.findOne({
+        include: ['Subject']},{ where: {id}
+    })
     .then(editTeacher => {
-        res.render('editTeacher', {editTeacher, err:null})
+        model.Subject.findAll()
+        .then(subjects => {
+            // res.json(editTeacher)
+            res.render('editTeacher', {editTeacher, subjects, err:null})
+        })
     })
     .catch(err => {
         res.send(err)

@@ -2,7 +2,7 @@
   "development": {
     "username": "setia",
     "password": "setia",
-    "database": "Association 1 to M",
+    "database": "Association-One-to-Many",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

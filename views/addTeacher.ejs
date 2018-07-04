@@ -15,8 +15,9 @@
     <br>
     Choose Subject:<br>
         <select name="SubjectId"> 
-            <option value="1">Math</option>
-            <option value="2">Geography</option>
+            <%subjects.forEach(subject => { %>
+                <option value="<%=subject.id%>"><%= subject.subjectName%></option>
+            <% }) %>
         </select>
     <br><br>
     <input type="submit" value="Submit">
