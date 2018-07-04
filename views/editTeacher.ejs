@@ -25,15 +25,22 @@
                     <% if(!teacher.SubjectId){ %>
                         <option value="" >--pilih subject--</option>
                     <% }else{ %>
+
+                        
                         <% subjects.forEach(function(elemen){ %>
                             <% if(elemen.id == teacher.SubjectId){ %>
-                                <option value="<%- elemen.id %>"><%- elemen.subjectName %></option>                   
-                                <% } %>
+                                <option selected value="<%- elemen.id %>"><%- elemen.subjectName %></option>                      
+                            <% }else{ %>
+                                <option value="<%- elemen.id %>"><%- elemen.subjectName %></option>
+                            <% } %>
                         <% }) %>
+
+                        
+
+                        
+                        
                     <% } %>
-                <% subjects.forEach(function(el){ %>
-                    <option value="<%- el.id %>"><%- el.subjectName %></option>
-                <% }) %>
+
             </select>
             
             <br><br>
