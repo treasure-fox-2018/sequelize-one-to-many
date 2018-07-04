@@ -67,7 +67,14 @@ app.post('/teacher', function(req, res){
 app.get('/teacher/edit/:id', function(req,res){
     models.Teacher.findById(req.params.id)
     .then(teacher=>{
-        res.render('teacher_edit.ejs',{teacher:teacher})
+        models.Subject.findAll()
+        .then(subjects => {
+            res.render('teacher_edit.ejs',{teacher:teacher, error: null, subjects: subjects})
+        })
+        .catch(err => {
+            res.send(err.message)
+        })
+        
     })
 })
 
@@ -75,7 +82,8 @@ app.post('/teacher/edit/:id',function(req,res){
     models.Teacher.update({
         first_name:req.body.first_name,
         last_name:req.body.last_name,
-        email:req.body.email
+        email:req.body.email,
+        subjectId: req.body.subjectId
     },{
         where : {id:req.params.id}
     })
@@ -83,7 +91,11 @@ app.post('/teacher/edit/:id',function(req,res){
         res.redirect('/teacher')        
     })
     .catch(err=>{
-        res.send(err.message)
+        models.Subject.findAll()
+        .then(subjects => {
+        let teacher = {id: req.params.id,first_name:req.body.first_name, last_name: req.body.last_name, email: req.body.email,subjects: req.body.subjectId}
+        res.render('teacher_edit.ejs',{error: err.message, teacher:teacher, subjects:subjects})
+        })
     })
 })
 

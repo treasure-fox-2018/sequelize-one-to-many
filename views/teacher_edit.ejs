@@ -5,6 +5,7 @@
     <title></title>
 </head>
 <body>
+    <% if(error == null){ %>
     <h2>Teachers Form</h2>
     <form action="/teacher/edit/<%=teacher.id%>" method="POST">
     <br>
@@ -16,9 +17,47 @@
     <br><br>
     Email:<br>
     <input type="text" name="email" value=<%=teacher.email%>
-    <br>
     <br><br>
-    <button type="submit" onclick="alert('Succesfully updated')" value="submit">submit</button>
+    Choose Subject:<br>
+    <select name="subjectId">
+            <% subjects.forEach(function(subject){ %>
+                <% if(subject.subjectId === teacher.SubjectId){ %>
+                    <option value="<%=subject.id %>" selected><%= subject.subject_name %></option>
+                <% } else {%>
+                    <option value="<%=subject.id %>"><%= subject.subject_name %></option>
+                <% } %>
+            <% }) %>
+    </select>
+    <br><br>
+    <button type="submit" value="submit">submit</button>
     </form> 
+    <% } else {%>
+    <h2>Teachers Form</h2>
+    <h3><%= error %></h3>
+    <form action="/teacher/edit/<%=teacher.id%>" method="POST">
+    <br>
+    First name:<br>
+    <input type="text" name="first_name" value=<%=teacher.first_name%>>
+    <br>
+    Last name:<br>
+    <input type="text" name="last_name" value=<%=teacher.last_name%>
+    <br><br>
+    Email:<br>
+    <input type="text" name="email" value=<%=teacher.email%>
+    <br>
+    Choose Subject<br>
+            <select name="subjectId">
+                    <% subjects.forEach(function(subject){ %>
+                        <% if(subject.subjectId === teacher.SubjectId){ %>
+                            <option value="<%=subject.id %>" selected><%= subject.subject_name %></option>
+                        <% } else {%>
+                        <option value="<%=subject.id %>"><%= subject.subject_name %></option>
+                        <% } %>
+                    <% }) %>
+            </select>
+    <br><br>
+    <button type="submit" value="submit">submit</button>
+    </form> 
+    <% } %>
 </body>
 </html>
