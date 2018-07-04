@@ -7,22 +7,48 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate:{
         isEmail :true,
-        isUnique(value, next){
-          Teacher
-          .findOne({
-            where:{email:value}
-          })
-          .then(function(teacher){
-            if(teacher){
-              next("please use another email")
-            }else{
-              next()
-            }
-          })
-          .catch(function(err){
-            next(err.message)
-          })
-        },
+        isUnique(values, next){
+          let id  = this.dataValues.id
+          if(!id){
+            Teacher
+            .findOne({
+              where :{
+                email:values 
+              }
+            })
+            .then(function(teacher){
+              if(teacher){
+                next('email is used')
+              }
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+          }else{
+            Teacher
+            .findOne({
+              where:{
+                email:values
+              }
+            })
+            .then((teacher)=>{
+              let id = this.dataValues.id
+              console.log("id dari this", id)
+              console.log("id dari teacher", teacher.id)
+
+              if(teacher.id == id){
+                next()
+              }else{
+                next('email is used')
+              }
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+            
+          }
+          
+        }
       },
     },
   }, { });
@@ -35,38 +61,43 @@ module.exports = (sequelize, DataTypes) => {
     return `${this.firstName} ${this.lastName}`
   }
 
-  Teacher.beforeValidate(function(teacher, options){
-    let id = teacher.id
-    let email = teacher.email
-      Teacher
-      .findById(id)
-      .then(function(teacher){
-        if(teacher.email === email){
-           Teacher.deleteOldEmail(id, email) 
-        }
-      })
-      .catch(function(err){
-        console.log(err)
-      })
-  });
+  // Teacher.beforeValidate(function(teacher, options){
+  //   let id = teacher.id
+  //   let email = teacher.email
+  //     Teacher
+  //     .findById(id)
+  //     .then(function(teacher){
+  //       if(teacher.email === email){
+  //          Teacher.deleteOldEmail(id, email) 
+  //       }
+  //     })
+  //     .catch(function(err){
+  //       console.log(err)
+  //     })
+  // });
 
-  Teacher.beforeCreate( function(user, options){
-    console.log('hoiii')
-  });
+  // Teacher.beforeCreate( function(user, options){
+  //   console.log('hoiii')
+  // });
 
-  Teacher.deleteOldEmail = function(id, email){
-    Teacher
-    .update({
-      email : null
-    }, {
-      where:{
-        id:id
-      }
-    })
-    .catch(function(err){
-      console.log(err)
-    })
-  }
+  // Teacher.deleteOldEmail = function(id, email){
+  //   Teacher
+  //   .update({
+  //     email : null
+  //   }, {
+  //     where:{
+  //       id:id
+  //     }
+  //   })
+  //   .catch(function(err){
+  //     console.log(err)
+  //   })
+  // }
+
+  // Teacher.prototype.deleteEmail = function(values){
+  //   Teacher
+  //   .findOne
+  // }
   
   return Teacher;
 };
