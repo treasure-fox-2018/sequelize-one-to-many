@@ -37,9 +37,12 @@ h1, p{
             <br>
             Subject:<br>
             <select name= "SubjectId">
-                    <option><%= editTeacher.Subject.subjectName%></option>
                 <% subjects.forEach(subject => { %>
-                    <option value="<%= subject.id%>"> <%=subject.subjectName%></option>
+                    <% if (subject.id === editTeacher.SubjectId) { %>
+                        <option value="<%= subject.id%>" selected> <%=subject.subjectName%></option>
+                    <% } else { %>
+                        <option value="<%= subject.id%>"> <%=subject.subjectName%></option>
+                    <% } %>
                <% }) %>
             </select>
             <br><br>
