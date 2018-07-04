@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         isUnique: function(value, next){
           Teacher.find({where: {email: value}})
           .then(email => {
-            if(email !== null){
+            if(email !== null && this.id == email.id){
+              console.log(this.id)
               return next('email is already used here')
             } else {
               next()

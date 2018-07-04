@@ -17,6 +17,13 @@
             <br>
             Email:<br>
             <input type="text" name="email">
+            <br>
+            Choose Subject<br>
+            <select name="subjectId">
+                    <% subjects.forEach(function(subject){ %>
+                        <option value="<%=subject.id %>"><%= subject.subject_name %></option>
+                    <% }) %>
+            </select>
             <br><br>
             <input type="submit" value="Submit">
         </form>
@@ -24,13 +31,20 @@
         <h3><%= error %> </h3>
         <form action="/teacher" method="POST">
             First name:<br>
-            <input type="text" name="first_name">
+            <input type="text" name="first_name" value="<%= inputData.first_name %>">
             <br>
             Last name:<br>
-            <input type="text" name="last_name">
+            <input type="text" name="last_name" value="<%= inputData.last_name %>">
             <br>
             Email:<br>
-            <input type="text" name="email">
+            <input type="text" name="email" value="<%= inputData.email %>">
+            <br>
+            Choose Subject<br>
+            <select name="subjectId">
+                    <% subjects.forEach(function(subject){ %>
+                        <option value="<%=subject.id %>"><%= subject.subject_name %></option>
+                    <% }) %>
+            </select>
             <br><br>
             <input type="submit" value="Submit">
         </form>

@@ -33,21 +33,33 @@ app.get('/subject', function(req,res){
 })
 
 app.get('/teacher/add', function(req, res){
-    res.render('new_teacher.ejs', {error: null})
+    models.Subject.findAll()
+    .then(subjects => {
+        res.render('new_teacher.ejs', {error: null, subjects: subjects})
+    })
+    .catch(err => {
+        res.send(err.message)
+    })
+    
 })
 
 app.post('/teacher', function(req, res){
     models.Teacher.create({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        email: req.body.email
+        email: req.body.email,
+        SubjectId: req.body.subjectId
     })
     .then(function(){
         res.redirect('/teacher')
     })
     .catch(function(err){
-        let inputdata = {first_name: req.body.first_name, last_name: req.body.last_name,email: req.body.email}
-        res.render('new_teacher.ejs', {inputData: inputdata, error: err.message})
+        models.Subject.findAll()
+        .then(subjects => {
+            let inputdata = {first_name: req.body.first_name, last_name: req.body.last_name,email: req.body.email}
+            res.render('new_teacher.ejs', {inputData: inputdata, error: err.message, subjects: subjects})
+        })
+        
     })
 
 })
