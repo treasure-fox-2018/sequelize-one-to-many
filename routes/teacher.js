@@ -13,7 +13,10 @@ router.get('/teacher', function(req,res){
 })
 
 router.get('/teacher/add',function(req,res){
-    res.render('add_teacher')
+    model.Subject.findAll()
+    .then((dataTeacher) => {
+        res.render('add_teacher', {err: null, dataTeacher: dataTeacher})
+    })
 })
 
 router.post('/teacher/add', function(req,res){
@@ -25,18 +28,24 @@ router.post('/teacher/add', function(req,res){
     })
     .then(() => {
         res.redirect('/teacher')
+
+    })
+    .catch((err) => {
+        console.log(err)
+        res.render('add_teacher',{err: err.message, dataSubject: null })
     })
 })
 
 router.get('/teacher/edit/:id',function(req,res){
     model.Teacher.findById(req.params.id)
-    .then((data_teacher) => {
-        res.render('edit_teacher', {dataTeacher: data_teacher})
+    .then((dataTeacher) => {
+        res.render('edit_teacher', {err: null, dataTeacher: dataTeacher})
     })
 })
 
 router.post('/teacher/edit/:id', function(req,res){
     model.Teacher.update({
+        id: req.params.id,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -45,6 +54,10 @@ router.post('/teacher/edit/:id', function(req,res){
     .then(() => {
         // console.log(data_teacher)
         res.redirect('/teacher')
+    })
+    .catch((err) => {
+        console.log(err)
+        res.render('edit_teacher',{err: err.message, dataTeacher: null })
     })
 })
 

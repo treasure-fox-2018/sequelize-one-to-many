@@ -6,8 +6,8 @@ router.get('/subject',function(req,res){
     model.Subject.findAll({
         include: [model.Teacher]
     })
-    .then((data_subject) => {
-        res.render('subject', {dataSubject: data_subject})
+    .then((dataSubject) => {
+        res.render('subject', {dataSubject: dataSubject})
     })
 })
 

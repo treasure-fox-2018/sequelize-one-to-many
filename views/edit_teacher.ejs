@@ -16,10 +16,14 @@
         <label for="email">Email :</label>
         <input type="email" name="email" value="<%=dataTeacher.email%>">
         <br><br>
-        <label for="SubjectId"> Subject Id :</label>
-        <input type="text" name="SubjectId" value="<%=dataTeacher.SubjectId%>">
+            <select name="SubjectId" size='1'>
+                <option value="1">Fisika</option>
+                <option value="2">Ekonomi</option>
+            </select>
         <br><br>
         <button>Edit Teacher</button>
+        <br><br>
+        <a href="/teacher">back</a>
     </form>
   </body>
 </html>
