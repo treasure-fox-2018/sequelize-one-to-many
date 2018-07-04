@@ -1,7 +1,7 @@
 'use strict';
-const Op = Sequelize.Op
 
 module.exports = (sequelize, DataTypes) => {
+  const Op = sequelize.Op
   var Student = sequelize.define('Student', {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'Wrong email format!'
         },
-        isUnique: (value, cb) => {
+        isUnique: function (value, cb) {
+          console.log(this)
           Student.find({
             where: {
               email: value,
@@ -24,8 +25,9 @@ module.exports = (sequelize, DataTypes) => {
           .then( (email) => {
             if (email !== null) {
               cb ('Email already used!');
+            } else {
+              cb(null);
             }
-            cb(null);
           });
         }
       }
@@ -33,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Student.associate = function(models) {
-    Student.hasMany(models.Subject)
   };
   return Student;
 };

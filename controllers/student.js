@@ -2,7 +2,7 @@ const models = require('../models');
 
 class Controller {
   static showAll (){
-    return models.Student.findAll({raw:true, order: [
+    return models.Student.findAll({order: [
       ['id', 'ASC']
     ] })
   }
@@ -12,7 +12,7 @@ class Controller {
   }
 
   static findById(id){
-    return models.Student.findById(id, {raw:true})
+    return models.Student.findById(id)
   }
 
   static update(inputObj, id){

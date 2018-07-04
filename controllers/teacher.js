@@ -3,8 +3,8 @@ const models = require('../models');
 class Controller {
   static showAll (){
     return models.Teacher.findAll({
-      order: [['id', 'ASC']], 
-      include: [models.Subject]
+      order: [['id', 'ASC']],
+      include: [models.Subject] 
     }
   )
   }

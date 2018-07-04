@@ -1,6 +1,19 @@
 <html>
   <head>
     <title>Subjects Data</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
   </head>
   <body>
     <h2><a href="/">Home</a></h2>
@@ -11,7 +24,7 @@
         <th>Id</th>
         <th>Subject Name</th>
         <th>Teacher</th>
-        <th>Options</th>
+        <th colspan = "2">Options</th>
       </tr>
     </thead>
     <tbody>
@@ -31,5 +44,6 @@
     </tbody>
   </table>
   <br>
+  <h2><a href="/subjects/add">Add Subject Data</a></h2>
   </body>
 </html>

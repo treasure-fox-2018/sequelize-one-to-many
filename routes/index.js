@@ -72,11 +72,11 @@ routes.get('/students/delete/:id', (req, res)=> {
   })
 })
 
-
 //TEACHER
 routes.get('/teachers/', (req, res) => {
   teacher.showAll()
   .then( teachers => {
+    console.log(teachers[0])
     res.render('teachers-data', {teachers: teachers})
   })
   .catch( err => {
@@ -114,7 +114,7 @@ routes.get('/teachers/edit/:id', (req, res) => {
 })
 
 routes.post('/teachers/edit/:id', (req, res) => {
-  let tacherObj = {
+  let teacherObj = {
     first_name : req.body.first_name,
     last_name : req.body.last_name,
     email : req.body.email
@@ -143,7 +143,6 @@ routes.get('/subjects/', (req, res) => {
   subject.showAll()
   .then( subjects => {
     res.render('subjects-data', {subjects: subjects})
-    console.log(subjects[0].Teachers[0].first_name)
   })
   .catch( err => {
     res.send(err.message)
