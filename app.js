@@ -32,7 +32,14 @@ app.get('/teachers', (req, res) => {
 
 
 app.get('/teachers/add', (req, res) => {
-  res.render('./teacher/add', {dataTeacher : {} , error : null})
+  models.Subject.findAll({
+    order : [["id","ASC"]]
+  })
+  .then (dataSubjects => {
+    res.render('./teacher/add', {dataTeacher : {} , dataSubjects : dataSubjects, error : null})
+  }).catch (err => {
+    res.render('./teacher/add', {dataTeacher : {} , dataSubjects : {}, error : err})
+  })
 })
 
 app.post('/teachers/add', (req, res) => {
@@ -45,18 +52,34 @@ app.post('/teachers/add', (req, res) => {
     .then(() => {
        res.redirect('/teachers')
     })
-    .catch(err => {
-      res.render('./teacher/add', {dataTeacher : req.body , error : err.message})
+    .catch(errTeacher => {
+      models.Subject.findAll({
+        order : [["id","ASC"]]
+      })
+        .then (dataSubjects => {
+          res.render('./teacher/add', {dataTeacher : req.body , dataSubjects : dataSubjects, error : errTeacher.message})
+        })
+        .catch (errSubject => {
+          res.render('./teacher/add', {dataTeacher : req.body , dataSubjects : [], error : errSubject})
+      })
     })
 })
 
 app.get('/teachers/edit/:id', (req, res) => {
   models.Teacher.findById(req.params.id)
     .then(dataTeacher => {
-      res.render('./teacher/edit', {dataTeacher : dataTeacher , error : null})
-    })
-    .catch(err => {
-      res.render('./teacher/edit', {dataTeacher : [] , error : err.message})
+      models.Subject.findAll({
+          order : [["id","ASC"]]
+        })
+          .then (dataSubjects => {
+            res.render('./teacher/edit', {dataTeacher : dataTeacher , dataSubjects : dataSubjects, error : null})
+        })
+          .catch (errSubject => {
+            res.render('./teacher/edit', {dataTeacher : dataTeacher , dataSubjects : [], error : errSubject.message })
+          })
+      })
+    .catch(errTeacher => {
+      res.render('./teacher/edit', {dataTeacher : [] , dataSubjects : [] , error : errTeacher.message})
     })
 })
 
@@ -79,8 +102,16 @@ app.post('/teachers/edit/:id', (req, res) => {
       res.redirect('/teachers')
     })
     .catch(err => {
-      res.render('./teacher/edit', {dataTeacher : req.body , error : err.message})
-    })
+      models.Subject.findAll({
+         order : [["id","ASC"]]
+       })
+         .then (dataSubjects => {
+           res.render('./teacher/edit', {dataTeacher : req.body , dataSubjects : dataSubjects, error : err})
+       })
+         .catch (errSubject => {
+           res.render('./teacher/edit', {dataTeacher : req.body , dataSubjects : [], error : errSubject.message })
+         })
+   })
 })
 
 app.get('/teachers/delete/:id', (req, res) => {
@@ -95,7 +126,7 @@ app.get('/teachers/delete/:id', (req, res) => {
     .catch(err => {
       res.render('./teacher/index', { dataTeachers: [], error : err.message})
     })
-})  
+})
 
 
 app.get('/subjects', (req, res) => {
