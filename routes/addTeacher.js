@@ -13,18 +13,16 @@ routes.get('/teacher/add', (req,res)=> {
 
 routes.post('/teacher', function(req,res){
     model.Teacher.create({
-        firts_name: req.body.firts_name,
+        firts_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
         SubjectId: req.body.SubjectId
 
     })
     .then(() => {
-        res.rediret('/teacher')
+        res.redirect('/teacher')
     })
-    .catch(() => {
-        res.render('./teacher/add',{error:err.message})
-    })
+   
 })
 
 module.exports = routes

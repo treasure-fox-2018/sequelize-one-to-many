@@ -8,6 +8,39 @@
 </head>
 <body>
     <h1>Edit Teacher</h1>
+
+    <form action="/teacher/edit/<%=data_teacher.id%>" method="POST">
+        <label for="firstName" >First Name :</label>
+        <input type="text" name="firstName" value="<%=data_teacher.firstName%>">
+        <br><br>
+        <label for="lastName">Last Name :</label>
+        <input type="text" name="lastName" value="<%=data_teacher.lastName%>">
+        <br><br>
+        <label for="email">Email :</label>
+        <input type="email" name="email" value="<%=data_teacher.email%>">
+        <br><br>
+            <select name="SubjectId" size='2'>
+                <option value= '1'>Fisika</option>
+                <option value="2">Ekonomi</option>
+            </select>
+        <br><br>
+        <button>Edit Teacher</button>
+        <br><br>
+        <a href="/teacher">Back</a>
+  
+    <!-- <form action="/teacher/edit/<%=dataTeacher.id%>" method="POST">
+        First name:<br>
+        <input type="text" name="first_name">
+        <br>
+        Last name:<br>
+        <input type="text" name="last_name">
+        <br>
+        Email:<br>
+        <input type="text" name="email">
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>  -->
+
     
 </body>
 </html>

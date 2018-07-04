@@ -13,7 +13,7 @@
                  <tr>
                     <th>id</th>
                     <th>subject_name</th>
-                    
+                    <th>Teacher</th>
                 </tr>
              </thead>
             <tbody>
@@ -21,12 +21,19 @@
                      <%data_subject.forEach((data_subject)=> {%>
                         <td> <%= data_subject.id %></td>
                         <td> <%= data_subject.subject_name %></td>
+                        <ol>
+                            <%data_teacher.Teacher.forEach((data_teacher) => {%>
+                                <li>
+                                    <%= data_teacher.firstName%> <%=data_teacher.lastName%>
+                                </li>
+                            <%=})%>
+                        </ol>
                        
                </tr>
                 <%})%>
 
             </tbody>
     </table>
-
+<a href="/">Back</a>
 </body>
 </html>

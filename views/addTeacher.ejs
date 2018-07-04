@@ -8,19 +8,30 @@
 </head>
 <body>
     <h1>Add Teacher Data</h1>
-    <form action="/teacher" method="POST">
-        <label for="/teacher" method="POST">First Name</label>
+    <form action="/teacher/add" method="POST">
+        First name:<br>
         <input type="text" name="first_name">
-        <br><br>
-        <label for="">Last Name</label>
+        <br>
+        Last name:<br>
         <input type="text" name="last_name">
-        <br><br>
-        <label for="">Email</label>
-        <input type="email" name="email">
-        <br><br>
-        <button>Add Teacher</button>
+        <br>
+        Email:<br>
+        <input type="text" name="email">
+        <br>
+        Subject Id :<br>
+        <select name="SubjectId" size='2'>
+            <option value="<%= teacher.id %>">
+            <% data_teacher.forEach(teacher {
+                <%= teacher.subjectName %>
+            </option>
+            <%=})%>
         
-    </form>
-    
+        </select>
+
+        <br><br>
+        <button>Submit</button>
+      </form> 
+    <br>
+    <a href="/teacher">back</a>
 </body>
 </html>

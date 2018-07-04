@@ -14,6 +14,14 @@ routes.get('/teacher', function(req,res){
     })
 })
 
+router.get('/teacher/delete/:id', function(req,res) {
+    model.Teacher.destroy(
+        {where: {id:req.params.id}})
+        .then(() => {
+            res.redirect('/teacher')
+        })
+})
+
 
 
 
