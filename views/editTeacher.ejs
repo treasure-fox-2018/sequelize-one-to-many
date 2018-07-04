@@ -43,13 +43,13 @@
                 <% } %>
                 <% }) %>
                 <% subjects.forEach(function(el) { %>
-                  <option value="<%= el.id%>"><%=el.subjectName %></option>
-                <% }) %>
+                  <% if (teacher.SubjectId !== el.id) {%><option value="<%= el.id%>"><%=el.subjectName %></option>
+                <% }}) %>
               </select>
             <div>
             </div>
           </div>
-          <button type="submit" onclick="alert('Your FUCKING data is up to date BITCH!!!')">Fuck Me!</button>
+          <button type="submit" onclick="alert('Your data is up to date')">Click Me!</button>
         </form>
       </div>
 

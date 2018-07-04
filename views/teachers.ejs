@@ -25,6 +25,7 @@
 <body>
 
   <h2>All Teachers Data</h2>
+  <p style="text-align:center;"><a href="/teachers/add/"><b>Add Teachers Data</b></a></p>
 
   <table>
     <tr>
@@ -60,7 +61,7 @@
               <% } %>
                 <td>
                   <a href='/teachers/edit/<%= el.id %>'>edit</a> |
-                  <a href='/teachers/edit/<%= el.id %>'>delete</a>
+                  <a href='/teachers/delete/<%= el.id %>'>delete</a>
                 </td>
         </tr>
         <% }) %>

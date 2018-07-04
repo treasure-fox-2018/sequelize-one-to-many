@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     subjectName: DataTypes.STRING
   }, {});
   Subject.associate = function(models) {
-    Subject.hasMany(models.Teacher)
     // associations can be defined here
+    Subject.hasMany(models.Teacher)
   };
   return Subject;
 };
