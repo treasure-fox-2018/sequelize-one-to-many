@@ -1,5 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+  const Op = sequelize.Op
   var Teacher = sequelize.define('Teacher', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
@@ -9,7 +10,23 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: {
           args: true,
           msg: 'Your Email is Wrong',
-        }
+        },
+        isUnik: function(value,next){
+          Teacher.findAll({
+            where: {
+              email: value,
+              id: {[Op.ne]: this.id}
+            }
+          }).then((data_teacher) => {
+            if (data_teacher == null) {
+              next()
+            }else {
+              return next('email is duplicated')
+            }
+          }).catch((err) => {
+            return next(err)
+          })
+  }
       }
     },
     SubjectId: DataTypes.INTEGER,

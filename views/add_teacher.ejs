@@ -7,6 +7,9 @@
 </head>
 <body>
     <h1>Add Teacher Data</h1>
+    <%if(err !== null){ %>
+        <p><%=err%></p>
+    <%}%>
     <form action="/teacher/add" method="POST">
         <label for="firstName" >First Name :</label>
         <input type="text" name="firstName">
@@ -17,8 +20,12 @@
         <label for="email">Email :</label>
         <input type="email" name="email">
         <br><br>
-        <label for="SubjectId"> Subject Id :</label>
-        <input type="text" name="SubjectId">
+        <label for="subject">Subject :</label>
+        <select name="SubjectId">
+            <% dataSubject.forEach((data) => { %>
+                <option value="<%=data.id%>"><%=data.subjectName%></option>
+            <%})%>
+        </select>
         <br><br>
         <button>Add Teacher</button>
     </form>

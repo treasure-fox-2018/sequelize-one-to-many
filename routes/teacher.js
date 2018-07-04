@@ -14,7 +14,10 @@ router.get('/teacher', function(req,res){
 })
 
 router.get('/teacher/add',function(req,res){
-    res.render('add_teacher')
+    model.Subject.findAll()
+    .then((dataSubject) => {
+        res.render('add_teacher', {err: null,dataSubject: dataSubject})
+    })
 })
 
 router.post('/teacher/add', function(req,res){
@@ -26,6 +29,11 @@ router.post('/teacher/add', function(req,res){
     })
     .then(() => {
         res.redirect('/teacher')
+        
+    })
+    .catch((err) => {
+        console.log(err)
+        res.render('add_teacher',{err: err.message, dataSubject: [] })
     })
 })
 
