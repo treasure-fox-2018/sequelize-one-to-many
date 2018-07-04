@@ -26,7 +26,13 @@
     <br><br>
     Email:  <input type="text" name="email" placeholder="email">
     <br><br>
-    Subject Id:  <input type="text" name="SubjectId" placeholder="SubjectId">
+    Subject: <select name="SubjectId">
+      <% subjects.forEach( subject => { %>
+        Subject: <option value="<%= subject.id %>"><%= subject.subject_name %></option>
+        <br><br>  
+      <% }) %>
+
+    </select>
     <br><br>
     <button type="submit">submit data</button>
   </form>
