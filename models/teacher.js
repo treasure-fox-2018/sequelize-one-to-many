@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Your Email is Wrong',
         },
         isUnik: function(value,next){
-          Teacher.findAll({
+          Teacher.findOne({
             where: {
               email: value,
               id: {[Op.ne]: this.id}
