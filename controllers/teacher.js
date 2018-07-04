@@ -21,8 +21,7 @@ class Controller {
     return models.Teacher.update(inputObj, {
       where: {
         id: id
-      },
-      returning:true
+      }
     })
   }
 

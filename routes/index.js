@@ -1,4 +1,5 @@
 const routes = require ('express').Router();
+const models = require ('../models')
 const student = require('../controllers/student');
 const teacher = require('../controllers/teacher');
 const subject = require('../controllers/subject');
@@ -85,28 +86,54 @@ routes.get('/teachers/', (req, res) => {
 })
 
 routes.get('/teachers/add', (req, res) => {
-  res.render('teachers-add', {errMsg: null})
+  models.Subject.findAll({
+    order : [['id', 'ASC']]
+  })
+  .then (subjects => {
+    res.render('teachers-add', {subjects : subjects, errMsg: null})
+  })
+  .catch(err => {
+    res.render('teachers-add', {errMsg: err})
+  })
 })
+
 
 routes.post('/teachers/add', (req, res) => {
   let teacherObj = {
     first_name : req.body.first_name,
     last_name : req.body.last_name,
-    email : req.body.email
+    email : req.body.email,
+    SubjectId : req.body.SubjectId
   }
   teacher.add(teacherObj)
   .then(()=> {
     res.redirect('/teachers')
   })
-  .catch( err => {
-    res.render('teachers-add', {errMsg: err.message})
+  .catch( errTeacher => {
+    models.Subject.findAll({
+      order : [['id', 'ASC']]
+    })
+    .then (subjects => {
+      res.render('teachers-add', {teachers: teacherObj, subjects : subjects, errMsg: errTeacher.message} )
+    })
+    .catch (errSubjects => {
+      res.render('teachers-add', {errMsg: errSubjects.message} )
+    })
   })
 })
 
 routes.get('/teachers/edit/:id', (req, res) => {
   teacher.findById(req.params.id)
   .then((teacher) => {
-    res.render('teacher-edit', {teacher: teacher})
+    models.Subject.findAll({
+      order : [['id', 'ASC']]
+    })
+    .then (subjects => {
+      res.render('teacher-edit', {teacher: teacher, subjects : subjects, errMsg: null} )
+    })
+    .catch (errSubjects => {
+      res.render('teacher-edit', {errMsg: errSubjects.message} )
+    })
   })
   .catch(err => {
     res.send(err.message)
@@ -115,16 +142,26 @@ routes.get('/teachers/edit/:id', (req, res) => {
 
 routes.post('/teachers/edit/:id', (req, res) => {
   let teacherObj = {
+    id : req.params.id,
     first_name : req.body.first_name,
     last_name : req.body.last_name,
-    email : req.body.email
+    email : req.body.email,
+    SubjectId : req.body.SubjectId
   }
   teacher.update(teacherObj, req.params.id)
   .then(() => {
     res.redirect('/teachers')
   })
-  .catch(err => {
-    res.send(err.message)
+  .catch(errTeacher => {
+    models.Subject.findAll({
+      order : [['id', 'ASC']]
+    })
+    .then (subjects => {
+      res.render('teacher-edit', {teacher: teacherObj, subjects : subjects, errMsg: errTeacher.message} )
+    })
+    .catch (errSubjects => {
+      res.render('teacher-edit', {errMsg: errSubjects.message} )
+    })
   })
 })
 
